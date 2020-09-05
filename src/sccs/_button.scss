@@ -1,0 +1,12 @@
+@import "mixin";
+
+.Button{
+  border: none;
+  padding: 18px;
+
+  &_dark{
+    background: $Primery200;
+    color: #FFFFFF;
+    @include upText(16px, 0.13em);
+  }
+}

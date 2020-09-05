@@ -1,0 +1,26 @@
+@mixin upText($font-size, $letter-spacing){
+  font-size: $font-size;
+  letter-spacing: $letter-spacing;
+  text-transform: uppercase;
+}
+@mixin h1{
+  font-size: 28px;
+  font-family: Playfair Display;
+  font-weight: bold;
+  @include upText(28px, 0.05em);
+}
+@mixin baseCard{
+  width: available;
+  height: available;
+  display: grid;
+  background: #FFFFFF;
+}
+
+$margin: 135px;
+
+@mixin mainMargin{
+  margin:0 $margin;
+}
+@mixin mainPadding{
+  padding:0 $margin;
+}

@@ -1,0 +1,43 @@
+@import 'header';
+@import 'mainPage';
+@import 'footer';
+@import 'colors';
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap');
+
+body{
+  font-family: 'Open Sans', sans-serif;
+  background: #FFFFFF;
+  margin: 0;
+  color: $Primery200;
+}
+
+.content{
+  background: #FAFDFF;
+  width: available;
+  height: available;
+}
+
+.head {
+  padding: 60px 135px;
+  background-image: linear-gradient(to right,transparent 60%, $Pink200 10px);
+}
+
+.separator{
+  border-bottom: 3px solid $Primery200;
+  margin-top: 10px;
+  width: 90px;
+}
+
+.Tabs{
+  &-Item{
+    margin-right: 5%;
+    font-weight: 600;
+    font-size: 16px;
+    color: rgba(0, 0, 0, 0.4);
+    &_active{
+      color:#000000
+    }
+  }
+}
+

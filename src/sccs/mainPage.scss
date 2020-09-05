@@ -1,0 +1,206 @@
+@import 'card';
+@import 'colors';
+@import 'button';
+@import 'header';
+@import 'footer';
+@import 'mixin';
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap');
+
+.mainView {
+  margin-top: 125px;
+  display: grid;
+  grid-template-columns: 80% 20%;
+
+  &-Card {
+    display: grid;
+    grid-template-columns: 60% 40%;
+
+    &-Info {
+
+      .title {
+        font-family: Playfair Display;
+        font-weight: bold;
+        line-height: 145%;
+        @include upText(57px, 0.05em);
+      }
+
+      .productName {
+        font-size: 20px;
+        margin-top: 20px;
+      }
+
+      &-Button {
+        width: 238px;
+      }
+
+      .price {
+        margin: 10px 0 35px 0;
+
+        &_old {
+          font-size: 20px;
+          margin-right: 22px;
+        }
+
+        &_new {
+          font-weight: 600;
+          font-size: 30px;
+
+        }
+      }
+    }
+
+    &-Image {
+      & > img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+
+  &-Pagination {
+    margin-left: auto;
+    margin-top: 40%;
+    display: grid;
+    grid-template-columns: 70px;
+    height: min-content;
+
+    &-item {
+
+      font-family: Playfair Display;
+      font-size: 20px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: rgba(0, 0, 0, 0.3);
+      margin-bottom: 20px;
+      height: min-content;
+      text-align: center;
+
+      &_active { overflow: hidden;
+        padding:  0px 5px 5px 0;
+        font-size: 40px;
+        color: $Primery200;
+        border-right: 2px solid $Primery200;
+      }
+    }
+  }
+}
+
+.newProducts {
+  @include mainMargin;
+  margin-top: 120px;
+  display: grid;
+  grid-template-rows: repeat(2, 289px);
+  grid-template-columns: repeat(4, 100%/4-2);
+  row-gap: 37px;
+  column-gap: 30px;
+
+  & > div {
+    &:nth-child(1) {
+      &>span{
+        &:before{
+          content: "";
+          display: block;
+          height: 40%;
+        }
+        padding-top: 40px;
+        @include h1;
+      }
+    }
+
+    &:nth-child(3) {
+      grid-row-start: 1;
+      grid-row-end: 3;
+      grid-column-start: 3;
+      grid-column-end: 5;
+    }
+  }
+}
+
+.reviewsСarousel{
+  @include mainMargin;
+  margin-top: 100px;
+  display: grid;
+  grid-template-columns:  100px auto 100px;
+  .review {
+    text-align: center;
+
+    &-userPhoto {
+      text-align: center;
+      overflow: hidden;
+      display: block;
+      height: 100px;
+      width: 100px;
+      border-radius: 100%;
+
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 20px;
+
+      & > img {
+        height: 100%;
+        transform: translate(-20%, 0)
+      }
+    }
+
+    &-userName{
+      font-weight: 600;
+      font-size: 18px;
+    }
+
+    &-userStatus{
+      font-size: 16px;
+      color: $Primery100;
+    }
+
+    &-userComment{
+      margin-top: 20px;
+      color: $Primery100;
+      font-weight: 500;
+      font-style: italic;
+      font-size: 16px;
+      line-height: 154.36%;
+    }
+    &-pagination{
+      &>.item{
+        display: inline-block;
+        border: 1px solid #B3B3B3;
+        border-radius: 100%;
+        width: 8px;
+        height: 8px;
+        &_active{
+          background: #B3B3B3;
+        }
+      }
+    }
+  }
+}
+
+.lastChance {
+  @include mainPadding;
+  padding-top: 70px;
+  margin-top: 120px;
+  margin-bottom: 160px;
+
+  height: 500px;
+  background-image: linear-gradient(to left, transparent 45%, $Pink200 10px);
+  & > div {
+    &:nth-child(1) {
+      & > span {
+        @include h1;
+      }
+    }
+
+    &:nth-child(3) {
+      margin-top: 20px;
+      display: grid;
+      grid-template-columns: repeat(5, (100%/5 - 2));
+      grid-template-rows: 400px 1fr;
+      column-gap: 30px;
+    }
+  }
+  &-Tabs{
+    margin-top: 37px;
+  }
+
+}

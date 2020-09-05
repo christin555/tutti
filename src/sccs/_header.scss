@@ -1,0 +1,18 @@
+@import 'mixin';
+
+.header{
+  display: grid;
+  grid-template-columns: 15%  75%  10%;
+  .menu {
+    &>span {
+      padding-right: 60px;
+      @include upText(14px, 0.13em);
+    }
+  }
+  .fastActions{
+    text-align: right;
+    &>span {
+      margin-left: 22px;
+    }
+  }
+}

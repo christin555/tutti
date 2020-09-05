@@ -1,0 +1,81 @@
+@import 'mixin';
+@import 'colors';
+
+.CardSquare{
+ @include baseCard;
+  text-align: center;
+  grid-template-rows: minmax(65%,80%) 1fr 1fr;
+
+  .name{
+    display: flex;
+    align-items: flex-end;
+    margin: 0 auto;
+    font-size: 20px;
+  }
+
+  .price{
+    font-weight: 600;
+    font-size: 28px;
+    padding-bottom: 15px;
+    vertical-align: bottom;
+  }
+
+  &_dark{
+    background: #FAECE9;
+  }
+
+  .image{
+    img {
+      max-width: 100%;
+      max-height: 100%;
+    }
+  }
+}
+
+.CardRectangle{
+  @include baseCard;
+  text-align: left;
+  grid-template-rows: 1fr 1fr 2fr 70% 0;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.05);
+  .name{
+    font-size: 16px;
+    font-weight: normal;
+    padding: 15px;
+  }
+  .price{
+    padding-left: 15px;
+
+    &-old{
+      font-weight: 600;
+      font-size: 16px;
+      line-height: 22px;
+      text-decoration-line: line-through;
+      color: #979798;
+    }
+
+    &-new{
+     font-weight: 600;
+     font-size: 28px;
+   }
+  }
+
+  .image{
+    padding: 10px 0 0 35px;
+    overflow: hidden;
+      img {
+        max-height: 100%;
+      }
+
+  }
+    &-separator{
+      border-top: 5px solid #303032;
+      visibility: hidden;
+    }
+  &-Button{
+    width: 100%;
+    visibility: hidden;
+  }
+  &:hover &-Button, &:hover &-separator {
+    visibility: visible;
+  }
+}
