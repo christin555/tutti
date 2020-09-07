@@ -2,10 +2,10 @@
 
 .header{
   display: grid;
-  grid-template-columns: 15%  75%  10%;
+  grid-template-columns: 15%  60%  25%;
   .menu {
     &>span {
-      padding-right: 60px;
+      margin-right: 60px;
       @include upText(14px, 0.13em);
     }
   }
