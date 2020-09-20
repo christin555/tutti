@@ -119,14 +119,23 @@
   }
 }
 
+
 .reviewsСarousel{
   @include mainMargin;
   margin-top: 100px;
   display: grid;
   grid-template-columns:  100px auto 100px;
+  height: 256px;
+  #previousReview, #nextReview{
+    cursor: pointer;
+  }
+  .previousReview_disabled, .nextReview_disabled{
+    cursor: default   !important;
+    background: #303032;
+    color: #FFFFFF;
+  }
   .review {
     text-align: center;
-
     &-userPhoto {
       text-align: center;
       overflow: hidden;
@@ -162,6 +171,7 @@
       font-style: italic;
       font-size: 16px;
       line-height: 154.36%;
+      min-height: 48px;
     }
     &-pagination{
       &>.item{
@@ -170,6 +180,7 @@
         border-radius: 100%;
         width: 8px;
         height: 8px;
+        cursor: pointer;
         &_active{
           background: #B3B3B3;
         }
@@ -203,6 +214,7 @@
   }
   &-Tabs{
     margin-top: 37px;
+    cursor: pointer;
   }
 
 }
