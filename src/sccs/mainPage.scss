@@ -119,13 +119,12 @@
   }
 }
 
-
 .reviewsСarousel{
   @include mainMargin;
   margin-top: 100px;
   display: grid;
-  grid-template-columns:  100px auto 100px;
-  height: 256px;
+  grid-template-columns:  100px 1200px 100px;
+  height: 258px;
   #previousReview, #nextReview{
     cursor: pointer;
   }
@@ -133,9 +132,18 @@
     cursor: default   !important;
     background: #303032;
     color: #FFFFFF;
+    overflow: hidden;
   }
   .review {
     text-align: center;
+    overflow: hidden;
+    &-wrapper {
+      margin-right: 20px;
+      display: flex;
+    }
+    &-slide{
+      min-width:1200px;
+    }
     &-userPhoto {
       text-align: center;
       overflow: hidden;
@@ -173,8 +181,11 @@
       line-height: 154.36%;
       min-height: 48px;
     }
+
     &-pagination{
+      margin-top:10px;
       &>.item{
+        margin: 3px;
         display: inline-block;
         border: 1px solid #B3B3B3;
         border-radius: 100%;

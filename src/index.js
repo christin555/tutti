@@ -1,4 +1,5 @@
 import './sccs/style.scss';
+import Swiper from 'swiper';
 
 window.onload = function() {
     //data
@@ -8,14 +9,12 @@ window.onload = function() {
         {id: 3, img: 'src/img/main3.png', productName:'Кресло "Антиква3"', priceOld:'$242', priceNew:'$241', page: 3},
         {id: 4, img: 'src/img/main4.png', productName:'Кресло "Антиква4"', priceOld:'$243', priceNew:'$941', page: 4}
     ];
-
-    let rewiews = [
+    let reviews = [
         {id: 1, userPhoto: 'src/img/user.jfif', userName:'Елена Новикова', userStatus:'студентка', userComment:'«Хочу поделиться своими впечатлениями по использованию дивана «Бродвей», заказывала в конце 2016 года. Держится великолепно. Спасибо, большое сотрудникам этого чудесного магазина.»'},
         {id: 2, userPhoto: 'src/img/user2.jpg', userName:'user2', userStatus:'студент', userComment:'круто'},
         {id: 3, userPhoto: 'src/img/user3.jpg', userName:'user3', userStatus:'школьник', userComment:'супер круто'},
         {id: 4, userPhoto: 'src/img/user.jfif', userName:'user4', userStatus:'школьница', userComment:'пойдет'}
     ];
-
     let lastChance = {
         chairs: [
             {
@@ -119,17 +118,36 @@ window.onload = function() {
                 page: 4
             }
         ],
-};
+    };
 
     //init
-    changeReview(1);
     showLastChance('chairs');
     showNewProduct(productsMain[0]);
+    var mySwiper = new Swiper('.review', {
+        slidesPerView: 1,
+        spaceBetween: 1000,
+        wrapperClass: 'review-wrapper',
+        slideClass: 'review-slide',
+        navigation: {
+            nextEl: '#nextReview',
+            prevEl: '#previousReview',
+        },
+        pagination: {
+            el: '.review-pagination',
+            clickable: true,
+            bulletClass: 'item',
+            bulletActiveClass: 'item_active'
+        }
+    });
+    let reviewsCards = reviews.map(rev => {
+        return ReviewConsctruct(rev);
+    })
+    mySwiper.appendSlide(reviewsCards);
 
     //shared func
     function CardConsctruct(img,name,oldPrice,newPrice){
         let div = `
-         <div class="CardRectangle">
+             <div class="CardRectangle">
                 <div class="CardRectangle-separator"></div>
                 <div class="name">${name}</div>
                 <div class="price">
@@ -143,14 +161,26 @@ window.onload = function() {
                 <div>
                     <button class="Button Button_dark CardRectangle-Button" >Купить</button>
                 </div>
-            </div>`;
+                 </div>
+           `;
         return div;
     }
-
+    function ReviewConsctruct({userPhoto,userStatus,userComment,userName}){
+        let div = `
+                <div class="review-slide">
+                    <div class="review-userPhoto">
+                     <img src='${userPhoto}' />
+                     </div>
+                     <div class="review-userName">${userName}</div>
+                     <div class="review-userStatus">${userStatus}</div>
+                     <div class="review-userComment">${userComment}</div>
+                </div>
+           `;
+        return div;
+    }
     function changeText(className, text){
         document.querySelector(className).textContent = text;
     }
-
     function toogleClass(className, el){
         document.querySelector('.' + className).classList.remove(className);
         el.classList.add(className);
@@ -163,68 +193,31 @@ window.onload = function() {
             lastChancesProducts.innerHTML += (CardConsctruct(el.img,el.productName,el.priceOld,el.priceNew));
         });
     }
-
     function showNewProduct(product){
         changeText('.mainView-Card-Info .productName', product.productName);
         changeText('.mainView-Card-Info .priceOld', product.priceOld);
         changeText('.mainView-Card-Info .priceNew', product.priceNew);
         document.querySelector('.mainView-Card-Image img').setAttribute('src', product.img);
     }
-
-    function changeReview(newPage){
-        let key = newPage-1;
-
-        let element =  document.querySelector('.review-pagination>.item[value="'+newPage+'"]');
-        toogleClass('item_active', element);
-
-        document.querySelector('.review-userPhoto img').setAttribute('src', rewiews[key].userPhoto);
-        changeText('.review-userName',rewiews[key].userName);
-        changeText('.review-userStatus',rewiews[key].userStatus);
-        changeText('.review-userComment',rewiews[key].userComment);
-
-        let previousReview = document.querySelector('#previousReview');
-        let nextReview = document.querySelector('#nextReview');
-
-        key==0?
-            previousReview.classList.add('previousReview_disabled'):
-            previousReview.classList.remove('previousReview_disabled');
-        key==rewiews.length-1?
-            nextReview.classList.add('nextReview_disabled'):
-            nextReview.classList.remove('nextReview_disabled');
-
-    }
-        document.querySelectorAll('.mainView-Pagination-item').forEach(function (button) {
-            button.addEventListener('click', function () {
-                let nextPage = this.getAttribute('value');
-                let nextProduct = productsMain.filter(el => el.page == nextPage)[0];
-                showNewProduct(nextProduct);
-                toogleClass("mainView-Pagination-item_active", this);
-
-    })});
-
-    //events
-    document.querySelectorAll('.review-pagination>.item').forEach(function (button) {
+    document.querySelectorAll('.mainView-Pagination-item').forEach(function (button) {
         button.addEventListener('click', function () {
-            changeReview(this.getAttribute('value'))
+            let nextPage = this.getAttribute('value');
+            let nextProduct = productsMain.filter(el => el.page == nextPage)[0];
+            showNewProduct(nextProduct);
+            toogleClass("mainView-Pagination-item_active", this);
+
         })});
 
+    //events
     document.querySelectorAll('.Tabs-Item').forEach(function (button) {
         button.addEventListener('click', function () {
             showLastChance(this.getAttribute('value'));
             toogleClass('Tabs-Item_active', this);
         })});
-
     document.getElementById('previousReview').onclick = function() {
-        if(!this.classList.contains('previousReview_disabled')) {
-            let newPage = +document.querySelector('.review-pagination>.item_active').getAttribute('value') - 1;
-            changeReview(newPage);
-        }
+        mySwiper.navigation.prevEl;
     };
-
     document.getElementById('nextReview').onclick = function() {
-        if(!this.classList.contains('nextReview_disabled')) {
-            let newPage = +document.querySelector('.review-pagination>.item_active').getAttribute('value') + 1;
-            changeReview(newPage);
-        }
+        mySwiper.navigation.nextEl;
     };
 }
